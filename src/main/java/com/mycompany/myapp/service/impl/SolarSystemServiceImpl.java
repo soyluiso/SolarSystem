@@ -5,6 +5,7 @@ import com.mycompany.myapp.domain.SolarSystem;
 import com.mycompany.myapp.repository.SolarSystemRepository;
 import com.mycompany.myapp.service.dto.SolarSystemDTO;
 import com.mycompany.myapp.service.mapper.SolarSystemMapper;
+import com.mycompany.myapp.service.dto.SolarSystemStateDTO;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -100,4 +101,27 @@ public class SolarSystemServiceImpl implements SolarSystemService {
 
         return null;
     }
+
+
+    /**
+     * Get the weather state of the solar system.
+     *
+     * @param id the id of the entity
+     * @return the solar system state
+     */
+    @Transactional(readOnly = true)
+    public SolarSystemStateDTO calculateWeatherState(Long id, int days) {
+
+        SolarSystemDTO dto = solarSystemRepository.findById(id)
+            .map(solarSystemMapper::toDto).get();
+
+        return null;
+
+        //List<Planet> planets = solarSystem.getPlanets();
+
+        //WeatherState weatherState = calculateState(days,planets);
+
+        //return new SolarSystemStateDTO(days,weatherState);
+    }
+
 }
