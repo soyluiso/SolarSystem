@@ -1,0 +1,25 @@
+
+{
+    "solarSystemApp": {
+        "planet" : {
+            "home": {
+                "title": "Planets",
+                "createLabel": "Crear nuevo Planet",
+                "createOrEditLabel": "Crear o editar Planet"
+            },
+            "created": "Un nuevo Planet ha sido creado con el identificador {{ param }}",
+            "updated": "Un Planet ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Planet ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Planet {{ id }}?"
+            },
+            "detail": {
+                "title": "Planet"
+            },
+            "planetName": "Planet Name",
+            "planetVelocity": "Planet Velocity",
+            "planetRadius": "Planet Radius",
+            "solarSystem": "Solar System"
+        }
+    }
+}

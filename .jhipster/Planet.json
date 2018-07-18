@@ -1,0 +1,35 @@
+{
+    "name": "Planet",
+    "fields": [
+        {
+            "fieldName": "planetName",
+            "fieldType": "String"
+        },
+        {
+            "fieldName": "planetVelocity",
+            "fieldType": "Long"
+        },
+        {
+            "fieldName": "planetRadius",
+            "fieldType": "Long"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipName": "solarSystem",
+            "otherEntityName": "solarSystem",
+            "relationshipType": "many-to-one",
+            "otherEntityField": "id"
+        }
+    ],
+    "changelogDate": "20180717185107",
+    "entityTableName": "planet",
+    "dto": "mapstruct",
+    "pagination": "infinite-scroll",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "mySuffix"
+}
