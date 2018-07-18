@@ -41,6 +41,8 @@ public class CacheConfiguration {
             cm.createCache(com.mycompany.myapp.domain.Planet.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.SolarSystem.class.getName(), jcacheConfiguration);
             cm.createCache(com.mycompany.myapp.domain.SolarSystem.class.getName() + ".planets", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.SolarSystem.class.getName() + ".forecasts", jcacheConfiguration);
+            cm.createCache(com.mycompany.myapp.domain.SolarSystemForecast.class.getName(), jcacheConfiguration);
             // jhipster-needle-ehcache-add-entry
         };
     }

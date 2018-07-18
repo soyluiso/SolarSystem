@@ -1,0 +1,24 @@
+
+{
+    "solarSystemApp": {
+        "solarSystemForecast" : {
+            "home": {
+                "title": "Solar System Forecasts",
+                "createLabel": "Crear nuevo Solar System Forecast",
+                "createOrEditLabel": "Crear o editar Solar System Forecast"
+            },
+            "created": "Un nuevo Solar System Forecast ha sido creado con el identificador {{ param }}",
+            "updated": "Un Solar System Forecast ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Solar System Forecast ha sido eliminado con el identificador {{ param }}",
+            "delete": {
+                "question": "¿Seguro que quiere eliminar Solar System Forecast {{ id }}?"
+            },
+            "detail": {
+                "title": "Solar System Forecast"
+            },
+            "day": "Day",
+            "forecast": "Forecast",
+            "solarSystem": "Solar System"
+        }
+    }
+}

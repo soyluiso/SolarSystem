@@ -7,7 +7,9 @@
     <include file="config/liquibase/changelog/00000000000000_initial_schema.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180717185107_added_entity_Planet.xml" relativeToChangelogFile="false"/>
     <include file="config/liquibase/changelog/20180717185108_added_entity_SolarSystem.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719021700_added_entity_SolarSystemForecast.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-changelog - JHipster will add liquibase changelogs here -->
     <include file="config/liquibase/changelog/20180717185107_added_entity_constraints_Planet.xml" relativeToChangelogFile="false"/>
+    <include file="config/liquibase/changelog/20180719021700_added_entity_constraints_SolarSystemForecast.xml" relativeToChangelogFile="false"/>
     <!-- jhipster-needle-liquibase-add-constraints-changelog - JHipster will add liquibase constraints changelogs here -->
 </databaseChangeLog>

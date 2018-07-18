@@ -1,0 +1,41 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="planet">
+            <h2><span jhiTranslate="solarSystemApp.planet.detail.title">Planet</span> {{planet.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="solarSystemApp.planet.planetName">Planet Name</span></dt>
+                <dd>
+                    <span>{{planet.planetName}}</span>
+                </dd>
+                <dt><span jhiTranslate="solarSystemApp.planet.planetVelocity">Planet Velocity</span></dt>
+                <dd>
+                    <span>{{planet.planetVelocity}}</span>
+                </dd>
+                <dt><span jhiTranslate="solarSystemApp.planet.planetRadius">Planet Radius</span></dt>
+                <dd>
+                    <span>{{planet.planetRadius}}</span>
+                </dd>
+                <dt><span jhiTranslate="solarSystemApp.planet.solarSystem">Solar System</span></dt>
+                <dd>
+                    <div *ngIf="planet.solarSystemId">
+                        <a [routerLink]="['/solar-system-my-suffix', planet.solarSystemId, 'view']">{{planet.solarSystemId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/planet-my-suffix', planet.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

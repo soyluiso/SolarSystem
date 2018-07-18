@@ -1,0 +1,30 @@
+entity Planet {
+	planetName String,
+    planetVelocity Long,
+    planetRadius Long
+}
+
+entity SolarSystem {
+	systemName String
+}
+
+entity SolarSystemForecast {
+	day Integer,
+    forecast String
+}
+
+// defining multiple OneToMany relationships with comments
+relationship OneToMany {
+	SolarSystem{planet} to Planet
+    SolarSystem{forecast} to SolarSystemForecast
+}
+
+// Set pagination options
+paginate Planet with infinite-scroll
+
+dto * with mapstruct
+
+// Set service options to all except few
+service all with serviceImpl
+// Set an angular suffix
+angularSuffix * with mySuffix

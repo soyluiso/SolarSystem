@@ -1,0 +1,62 @@
+<div>
+    <h2 id="page-heading">
+        <span jhiTranslate="solarSystemApp.solarSystemForecast.home.title">Solar System Forecasts</span>
+        <button id="jh-create-entity" class="btn btn-primary float-right jh-create-entity create-solar-system-forecast-my-suffix" [routerLink]="['/solar-system-forecast-my-suffix/new']">
+            <fa-icon [icon]="'plus'"></fa-icon>
+            <span  jhiTranslate="solarSystemApp.solarSystemForecast.home.createLabel">
+            Create new Solar System Forecast
+            </span>
+        </button>
+    </h2>
+    <jhi-alert></jhi-alert>
+    <br/>
+    <div class="table-responsive" *ngIf="solarSystemForecasts">
+        <table class="table table-striped">
+            <thead>
+            <tr>
+            <th><span jhiTranslate="global.field.id">ID</span></th>
+            <th><span jhiTranslate="solarSystemApp.solarSystemForecast.day">Day</span></th>
+            <th><span jhiTranslate="solarSystemApp.solarSystemForecast.forecast">Forecast</span></th>
+            <th><span jhiTranslate="solarSystemApp.solarSystemForecast.solarSystem">Solar System</span></th>
+            <th></th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr *ngFor="let solarSystemForecast of solarSystemForecasts ;trackBy: trackId">
+                <td><a [routerLink]="['/solar-system-forecast-my-suffix', solarSystemForecast.id, 'view' ]">{{solarSystemForecast.id}}</a></td>
+                <td>{{solarSystemForecast.day}}</td>
+                <td>{{solarSystemForecast.forecast}}</td>
+                <td>
+                    <div *ngIf="solarSystemForecast.solarSystemId">
+                        <a [routerLink]="['../solar-system-my-suffix', solarSystemForecast.solarSystemId , 'view' ]" >{{solarSystemForecast.solarSystemId}}</a>
+                    </div>
+                </td>
+                <td class="text-right">
+                    <div class="btn-group flex-btn-group-container">
+                        <button type="submit"
+                                [routerLink]="['/solar-system-forecast-my-suffix', solarSystemForecast.id, 'view' ]"
+                                class="btn btn-info btn-sm">
+                            <fa-icon [icon]="'eye'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.view">View</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/solar-system-forecast-my-suffix', solarSystemForecast.id, 'edit']"
+                                class="btn btn-primary btn-sm">
+                            <fa-icon [icon]="'pencil-alt'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.edit">Edit</span>
+                        </button>
+                        <button type="submit"
+                                [routerLink]="['/', { outlets: { popup: 'solar-system-forecast-my-suffix/'+ solarSystemForecast.id + '/delete'} }]"
+                                replaceUrl="true"
+                                queryParamsHandling="merge"
+                                class="btn btn-danger btn-sm">
+                            <fa-icon [icon]="'times'"></fa-icon>
+                            <span class="d-none d-md-inline" jhiTranslate="entity.action.delete">Delete</span>
+                        </button>
+                    </div>
+                </td>
+            </tr>
+            </tbody>
+        </table>
+    </div>
+</div>

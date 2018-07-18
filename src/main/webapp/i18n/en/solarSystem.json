@@ -1,0 +1,24 @@
+
+{
+    "solarSystemApp": {
+        "solarSystem" : {
+            "home": {
+                "title": "Solar Systems",
+                "createLabel": "Create a new Solar System",
+                "createOrEditLabel": "Create or edit a Solar System"
+            },
+            "created": "A new Solar System is created with identifier {{ param }}",
+            "updated": "A Solar System is updated with identifier {{ param }}",
+            "deleted": "A Solar System is deleted with identifier {{ param }}",
+            "delete": {
+                "question": "Are you sure you want to delete Solar System {{ id }}?"
+            },
+            "detail": {
+                "title": "Solar System"
+            },
+            "systemName": "System Name",
+            "planet": "Planet",
+            "forecast": "Forecast"
+        }
+    }
+}

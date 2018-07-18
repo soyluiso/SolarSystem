@@ -1,0 +1,37 @@
+<div class="row justify-content-center">
+    <div class="col-8">
+        <div *ngIf="solarSystemForecast">
+            <h2><span jhiTranslate="solarSystemApp.solarSystemForecast.detail.title">Solar System Forecast</span> {{solarSystemForecast.id}}</h2>
+            <hr>
+            <jhi-alert-error></jhi-alert-error>
+            <dl class="row-md jh-entity-details">
+                <dt><span jhiTranslate="solarSystemApp.solarSystemForecast.day">Day</span></dt>
+                <dd>
+                    <span>{{solarSystemForecast.day}}</span>
+                </dd>
+                <dt><span jhiTranslate="solarSystemApp.solarSystemForecast.forecast">Forecast</span></dt>
+                <dd>
+                    <span>{{solarSystemForecast.forecast}}</span>
+                </dd>
+                <dt><span jhiTranslate="solarSystemApp.solarSystemForecast.solarSystem">Solar System</span></dt>
+                <dd>
+                    <div *ngIf="solarSystemForecast.solarSystemId">
+                        <a [routerLink]="['/solar-system-my-suffix', solarSystemForecast.solarSystemId, 'view']">{{solarSystemForecast.solarSystemId}}</a>
+                    </div>
+                </dd>
+            </dl>
+
+            <button type="submit"
+                    (click)="previousState()"
+                    class="btn btn-info">
+                <fa-icon [icon]="'arrow-left'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.back"> Back</span>
+            </button>
+
+            <button type="button"
+                    [routerLink]="['/solar-system-forecast-my-suffix', solarSystemForecast.id, 'edit']"
+                    class="btn btn-primary">
+                <fa-icon [icon]="'pencil-alt'"></fa-icon>&nbsp;<span jhiTranslate="entity.action.edit"> Edit</span>
+            </button>
+        </div>
+    </div>
+</div>

@@ -9,6 +9,7 @@
                 "main": "Entities",
                 "planetMySuffix": "Planet",
                 "solarSystemMySuffix": "Solar System",
+                "solarSystemForecastMySuffix": "Solar System Forecast",
                 "jhipster-needle-menu-add-entry": "JHipster will add additional entities here (do not translate!)"
             },
             "account": {

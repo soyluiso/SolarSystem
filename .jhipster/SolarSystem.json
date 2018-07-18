@@ -1,0 +1,33 @@
+{
+    "name": "SolarSystem",
+    "fields": [
+        {
+            "fieldName": "systemName",
+            "fieldType": "String"
+        }
+    ],
+    "relationships": [
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "planet",
+            "otherEntityName": "planet",
+            "otherEntityRelationshipName": "solarSystem"
+        },
+        {
+            "relationshipType": "one-to-many",
+            "relationshipName": "forecast",
+            "otherEntityName": "solarSystemForecast",
+            "otherEntityRelationshipName": "solarSystem"
+        }
+    ],
+    "changelogDate": "20180717185108",
+    "entityTableName": "solar_system",
+    "dto": "mapstruct",
+    "pagination": "no",
+    "service": "serviceImpl",
+    "jpaMetamodelFiltering": false,
+    "fluentMethods": true,
+    "clientRootFolder": "",
+    "applications": "*",
+    "angularJSSuffix": "mySuffix"
+}
