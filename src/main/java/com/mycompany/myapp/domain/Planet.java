@@ -7,6 +7,7 @@ import org.hibernate.annotations.CacheConcurrencyStrategy;
 import javax.persistence.*;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 /**
@@ -132,18 +133,17 @@ public class Planet implements Serializable {
     /**
      * Get the point of a Planet on a given day on R2
      *
-     * @param id the id of the entity
      * @param day the day
      * @return a pair of values on R2
      */
-    public double[] getPointInDay(int day) {
+    public BigDecimal[] getPointInDay(int day) {
 
-        int degrees = this.getPlanetVelocity().intValue() * day;
+        BigDecimal degrees = BigDecimal.valueOf(this.getPlanetVelocity()).multiply(BigDecimal.valueOf(day));
 
-        double x = this.getPlanetRadius() * Math.sin(Math.toRadians(degrees));
+        BigDecimal x = BigDecimal.valueOf(this.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.sin(Math.toRadians(degrees.doubleValue()))));
 
-        double y = this.getPlanetRadius() * Math.cos(Math.toRadians(degrees));
+        BigDecimal y = BigDecimal.valueOf(this.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.cos(Math.toRadians(degrees.doubleValue()))));
 
-        return (new double[]{x, y});
+        return (new BigDecimal[]{x, y});
     }
 }

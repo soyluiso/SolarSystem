@@ -14,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 
+import java.math.BigDecimal;
 import java.util.Optional;
 /**
  * Service Implementation for managing Planet.
@@ -94,15 +95,15 @@ public class PlanetServiceImpl implements PlanetService {
      * @param day the day
      * @return a pair of values on R2
      */
-    public double[] getPointInDay(Long id, int day) {
+    public BigDecimal[] getPointInDay(Long id, int day) {
         Planet planet = planetRepository.getOne(id);
 
-        int degrees = planet.getPlanetVelocity().intValue() * day;
+        BigDecimal degrees = BigDecimal.valueOf(planet.getPlanetVelocity()).multiply(BigDecimal.valueOf(day));
 
-        double x = planet.getPlanetRadius() * Math.sin(Math.toRadians(degrees));
+        BigDecimal x = BigDecimal.valueOf(planet.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.sin(Math.toRadians(degrees.doubleValue()))));
 
-        double y = planet.getPlanetRadius() * Math.cos(Math.toRadians(degrees));
+        BigDecimal y = BigDecimal.valueOf(planet.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.cos(Math.toRadians(degrees.doubleValue()))));
 
-        return (new double[]{x, y});
+        return (new BigDecimal[]{x, y});
     }
 }

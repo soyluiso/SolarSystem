@@ -14,6 +14,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
+import java.math.BigDecimal;
 import java.util.*;
 import java.util.stream.Collectors;
 /**
@@ -89,21 +90,6 @@ public class SolarSystemServiceImpl implements SolarSystemService {
     }
 
     /**
-     *
-     *
-     * @param id
-     * @return
-     */
-    public int[] getDryDays(Long id) {
-        Optional<SolarSystem> solarSystem = solarSystemRepository.findById(id);
-
-
-
-        return null;
-    }
-
-
-    /**
      * Get the weather state of the solar system.
      *
      * @param id the id of the entity
@@ -123,25 +109,25 @@ public class SolarSystemServiceImpl implements SolarSystemService {
 
     private WeatherState calculateState(int day, Set<Planet> planets) {
         if (planets.size() == 3) {
-            List<Planet> list = new ArrayList<>(planets);
+            List<Planet> list = new ArrayList(planets);
 
             Planet planet1 = list.get(0);
             Planet planet2 = list.get(1);
             Planet planet3 = list.get(2);
 
-            double[] pointInDay1 = planet1.getPointInDay(day);
-            double[] pointInDay2 = planet2.getPointInDay(day);
-            double[] pointInDay3 = planet3.getPointInDay(day);
+            BigDecimal[] pointInDay1 = planet1.getPointInDay(day);
+            BigDecimal[] pointInDay2 = planet2.getPointInDay(day);
+            BigDecimal[] pointInDay3 = planet3.getPointInDay(day);
 
-            double area = area(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1]);
-            boolean isInside = isInside(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1],0,0);
+            BigDecimal area = area(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1]);
+            boolean isInside = isInside(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1],BigDecimal.ZERO,BigDecimal.ZERO);
 
-            if (area != 0 && isInside) {
+            if (area.compareTo(BigDecimal.ZERO) != 0 && isInside) {
                 return WeatherState.RAIN;
             }
-            else if (area == 0 && isInside) {
+            else if (area.compareTo(BigDecimal.ZERO) == 0 && isInside) {
                 return WeatherState.DROUGHT;
-            } else if (area == 0 && !isInside) {
+            } else if (area.compareTo(BigDecimal.ZERO) == 0 && !isInside) {
                 return WeatherState.OPTIMUM;
             } else {
                 return WeatherState.NORMAL;
@@ -153,33 +139,32 @@ public class SolarSystemServiceImpl implements SolarSystemService {
 
     /* A utility function to calculate area of triangle
    formed by (x1, y1) (x2, y2) and (x3, y3) */
-    static double area(double x1, double y1, double x2, double y2,
-                       double x3, double y3)
+    static BigDecimal area(BigDecimal x1, BigDecimal y1, BigDecimal x2, BigDecimal y2,
+                           BigDecimal x3, BigDecimal y3)
     {
-        return Math.abs((x1*(y2-y3) + x2*(y3-y1)+
-            x3*(y1-y2))/2.0);
+        return (x1.multiply(y2.subtract(y3)).add(x2.multiply(y3.subtract(y1))).add(x3.multiply(y1.subtract(y2)))).divide(BigDecimal.valueOf(2)).abs();
     }
 
     /* A function to check whether point P(x, y) lies
    inside the triangle formed by A(x1, y1),
    B(x2, y2) and C(x3, y3) */
-    static boolean isInside(double x1, double y1, double x2,
-                            double y2, double x3, double y3, double x, double y)
+    static boolean isInside(BigDecimal x1, BigDecimal y1, BigDecimal x2,
+                            BigDecimal y2, BigDecimal x3, BigDecimal y3, BigDecimal x, BigDecimal y)
     {
         /* Calculate area of triangle ABC */
-        double A = area (x1, y1, x2, y2, x3, y3);
+        BigDecimal A = area (x1, y1, x2, y2, x3, y3);
 
         /* Calculate area of triangle PBC */
-        double A1 = area (x, y, x2, y2, x3, y3);
+        BigDecimal A1 = area (x, y, x2, y2, x3, y3);
 
         /* Calculate area of triangle PAC */
-        double A2 = area (x1, y1, x, y, x3, y3);
+        BigDecimal A2 = area (x1, y1, x, y, x3, y3);
 
         /* Calculate area of triangle PAB */
-        double A3 = area (x1, y1, x2, y2, x, y);
+        BigDecimal A3 = area (x1, y1, x2, y2, x, y);
 
         /* Check if sum of A1, A2 and A3 is same as A */
-        return (A == A1 + A2 + A3);
+        return (A.compareTo(A1.add(A2).add(A3)) == 0);
     }
 
 }

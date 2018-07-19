@@ -16,6 +16,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.math.BigDecimal;
 import java.net.URI;
 import java.net.URISyntaxException;
 
@@ -119,7 +120,7 @@ public class PlanetResource {
      */
     @GetMapping("/planets/{id}/position")
     @Timed
-    public double[] getPlanetOnADay(@PathVariable Long id, int day) {
+    public BigDecimal[] getPlanetOnADay(@PathVariable Long id, int day) {
         log.debug("REST request to get Planet position: {}", id);
         //Optional<PlanetDTO> planetDTO = planetService.findOne(id);
 

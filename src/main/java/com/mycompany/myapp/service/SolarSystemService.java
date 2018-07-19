@@ -1,6 +1,7 @@
 package com.mycompany.myapp.service;
 
 import com.mycompany.myapp.service.dto.SolarSystemDTO;
+import com.mycompany.myapp.service.dto.SolarSystemStateDTO;
 
 import java.util.List;
 import java.util.Optional;
@@ -40,4 +41,13 @@ public interface SolarSystemService {
      * @param id the id of the entity
      */
     void delete(Long id);
+
+    /**
+     * Get the state of the solar system on a day
+     *
+     * @param id the id of the entity
+     * @param day the day
+     * @return the state entity
+     */
+    SolarSystemStateDTO calculateWeatherState(Long id, int day);
 }

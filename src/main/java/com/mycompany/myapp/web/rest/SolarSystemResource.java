@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.service.SolarSystemService;
+import com.mycompany.myapp.service.dto.SolarSystemStateDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
 import com.mycompany.myapp.service.dto.SolarSystemDTO;
@@ -114,5 +115,19 @@ public class SolarSystemResource {
         log.debug("REST request to delete SolarSystem : {}", id);
         solarSystemService.delete(id);
         return ResponseEntity.ok().headers(HeaderUtil.createEntityDeletionAlert(ENTITY_NAME, id.toString())).build();
+    }
+
+    /**
+     * GET  /solar-systems/:id : get the "id" solarSystem.
+     *
+     * @param id the id of the solarSystemDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the solarSystemDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/solar-systems/{id}/weather")
+    @Timed
+    public SolarSystemStateDTO getWeather(@PathVariable Long id, int day) {
+        log.debug("REST request to get SolarSystem (id= {} ) weather on a particular day : {}", id, day);
+        SolarSystemStateDTO solarSystemStateDTO = solarSystemService.calculateWeatherState(id,day);
+        return solarSystemStateDTO;
     }
 }

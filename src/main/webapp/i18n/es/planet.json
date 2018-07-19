@@ -3,23 +3,23 @@
     "solarSystemApp": {
         "planet" : {
             "home": {
-                "title": "Planets",
-                "createLabel": "Crear nuevo Planet",
-                "createOrEditLabel": "Crear o editar Planet"
+                "title": "Planetas",
+                "createLabel": "Crear nuevo Planeta",
+                "createOrEditLabel": "Crear o editar Planeta"
             },
-            "created": "Un nuevo Planet ha sido creado con el identificador {{ param }}",
-            "updated": "Un Planet ha sido actualizado con el identificador {{ param }}",
-            "deleted": "Un Planet ha sido eliminado con el identificador {{ param }}",
+            "created": "Un nuevo Planeta ha sido creado con el identificador {{ param }}",
+            "updated": "Un Planeta ha sido actualizado con el identificador {{ param }}",
+            "deleted": "Un Planeta ha sido eliminado con el identificador {{ param }}",
             "delete": {
-                "question": "¿Seguro que quiere eliminar Planet {{ id }}?"
+                "question": "¿Seguro que quiere eliminar Planeta {{ id }}?"
             },
             "detail": {
-                "title": "Planet"
+                "title": "Planeta"
             },
-            "planetName": "Planet Name",
-            "planetVelocity": "Planet Velocity",
-            "planetRadius": "Planet Radius",
-            "solarSystem": "Solar System"
+            "planetName": "Nombre del Planeta",
+            "planetVelocity": "Velocidad del Planeta",
+            "planetRadius": "Radio del Planeta",
+            "solarSystem": "Sistema Solar"
         }
     }
 }

@@ -5,6 +5,7 @@ import com.mycompany.myapp.service.dto.PlanetDTO;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 
+import java.math.BigDecimal;
 import java.util.Optional;
 
 /**
@@ -51,5 +52,5 @@ public interface PlanetService {
      * @param day the day
      * @return
      */
-    double[] getPointInDay(Long id, int day);
+    BigDecimal[] getPointInDay(Long id, int day);
 }
