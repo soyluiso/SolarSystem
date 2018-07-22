@@ -104,6 +104,6 @@ public class PlanetServiceImpl implements PlanetService {
 
         BigDecimal y = BigDecimal.valueOf(planet.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.cos(Math.toRadians(degrees.doubleValue()))));
 
-        return (new BigDecimal[]{x, y});
+        return (new BigDecimal[]{x.setScale(5,BigDecimal.ROUND_HALF_UP), y.setScale(5,BigDecimal.ROUND_HALF_UP)});
     }
 }

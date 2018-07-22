@@ -144,6 +144,6 @@ public class Planet implements Serializable {
 
         BigDecimal y = BigDecimal.valueOf(this.getPlanetRadius()).multiply(BigDecimal.valueOf(Math.cos(Math.toRadians(degrees.doubleValue()))));
 
-        return (new BigDecimal[]{x, y});
+        return (new BigDecimal[]{x.setScale(5, BigDecimal.ROUND_HALF_UP), y.setScale(5, BigDecimal.ROUND_HALF_UP)});
     }
 }

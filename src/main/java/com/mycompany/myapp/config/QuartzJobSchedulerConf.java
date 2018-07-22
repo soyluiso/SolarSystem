@@ -12,6 +12,7 @@ import org.springframework.scheduling.quartz.SchedulerFactoryBean;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Properties;
 
 @Configuration
 @ComponentScan("com.jobs")
@@ -44,9 +45,15 @@ public class QuartzJobSchedulerConf {
     public SchedulerFactoryBean schedulerFactoryBean(ComplexJobService complexJobService) {
 
         SchedulerFactoryBean scheduler = new SchedulerFactoryBean();
-        scheduler.setConfigLocation(new ClassPathResource("properties/quartz.properties"));
+
+        Properties properties = new Properties();
+
+        properties.setProperty("org.quartz.threadPool.threadCount", "1");
+
+        //scheduler.setConfigLocation(new ClassPathResource("\\properties\\quartz.properties"));
         scheduler.setTriggers(
             cronTriggerFactoryBean(complexJobService).getObject());
+        scheduler.setQuartzProperties(properties);
         return scheduler;
     }
 }

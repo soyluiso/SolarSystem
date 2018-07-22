@@ -24,6 +24,8 @@ public class ComplexScheduledJob extends QuartzJobBean {
         throws JobExecutionException {
 
         complexJobService.execute();
+
+
         count++;
         System.out.println("Job count " + count);
     }

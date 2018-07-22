@@ -61,6 +61,17 @@ public class SolarSystemForecastServiceImpl implements SolarSystemForecastServic
             .collect(Collectors.toCollection(LinkedList::new));
     }
 
+    /**
+     * Get a Forecast
+     *
+     * @param id Solar System ID
+     * @param day day
+     * @return the forecast
+     */
+    @Transactional(readOnly = true)
+    public SolarSystemForecast findBySolarSystemAndDay(Long id, int day) {
+        return solarSystemForecastRepository.findBySolarSystemAndDay(id, day);
+    }
 
     /**
      * Get one solarSystemForecast by id.

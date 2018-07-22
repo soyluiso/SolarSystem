@@ -1,5 +1,6 @@
 package com.mycompany.myapp.service;
 
+import com.mycompany.myapp.domain.SolarSystemForecast;
 import com.mycompany.myapp.service.dto.SolarSystemForecastDTO;
 
 import java.util.List;
@@ -33,6 +34,15 @@ public interface SolarSystemForecastService {
      * @return the entity
      */
     Optional<SolarSystemForecastDTO> findOne(Long id);
+
+    /**
+     * Get the "id" solarSystemForecast.
+     *
+     * @param id the id of the Solar System
+     * @param day the day
+     * @return the entity
+     */
+    SolarSystemForecast findBySolarSystemAndDay(Long id, int day);
 
     /**
      * Delete the "id" solarSystemForecast.

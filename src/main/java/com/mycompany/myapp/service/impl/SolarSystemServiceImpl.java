@@ -89,7 +89,7 @@ public class SolarSystemServiceImpl implements SolarSystemService {
         solarSystemRepository.deleteById(id);
     }
 
-    /**
+    /*7
      * Get the weather state of the solar system.
      *
      * @param id the id of the entity
@@ -122,6 +122,8 @@ public class SolarSystemServiceImpl implements SolarSystemService {
             BigDecimal area = area(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1]);
             boolean isInside = isInside(pointInDay1[0],pointInDay1[1],pointInDay2[0],pointInDay2[1],pointInDay3[0],pointInDay3[1],BigDecimal.ZERO,BigDecimal.ZERO);
 
+            System.out.println(String.valueOf(day) + " " + area.toString());
+
             if (area.compareTo(BigDecimal.ZERO) != 0 && isInside) {
                 return WeatherState.RAIN;
             }
@@ -142,7 +144,7 @@ public class SolarSystemServiceImpl implements SolarSystemService {
     static BigDecimal area(BigDecimal x1, BigDecimal y1, BigDecimal x2, BigDecimal y2,
                            BigDecimal x3, BigDecimal y3)
     {
-        return (x1.multiply(y2.subtract(y3)).add(x2.multiply(y3.subtract(y1))).add(x3.multiply(y1.subtract(y2)))).divide(BigDecimal.valueOf(2)).abs();
+        return ((x1.multiply(y2.subtract(y3)).add(x2.multiply(y3.subtract(y1))).add(x3.multiply(y1.subtract(y2)))).divide(BigDecimal.valueOf(2)).abs()).setScale(5, BigDecimal.ROUND_HALF_UP);
     }
 
     /* A function to check whether point P(x, y) lies
