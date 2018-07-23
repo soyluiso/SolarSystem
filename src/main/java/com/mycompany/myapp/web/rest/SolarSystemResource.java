@@ -2,6 +2,7 @@ package com.mycompany.myapp.web.rest;
 
 import com.codahale.metrics.annotation.Timed;
 import com.mycompany.myapp.service.SolarSystemService;
+import com.mycompany.myapp.service.dto.SolarSystemFullForecastDTO;
 import com.mycompany.myapp.service.dto.SolarSystemStateDTO;
 import com.mycompany.myapp.web.rest.errors.BadRequestAlertException;
 import com.mycompany.myapp.web.rest.util.HeaderUtil;
@@ -129,5 +130,19 @@ public class SolarSystemResource {
         log.debug("REST request to get SolarSystem (id= {} ) weather on a particular day : {}", id, day);
         SolarSystemStateDTO solarSystemStateDTO = solarSystemService.calculateWeatherState(id,day);
         return solarSystemStateDTO;
+    }
+
+    /**
+     * GET  /solar-systems/:id : get the "id" solarSystem.
+     *
+     * @param id the id of the solarSystemDTO to retrieve
+     * @return the ResponseEntity with status 200 (OK) and with body the solarSystemFullForecastDTO, or with status 404 (Not Found)
+     */
+    @GetMapping("/solar-systems/{id}/allForecast")
+    @Timed
+    public SolarSystemFullForecastDTO calculateAllForecast(@PathVariable Long id) {
+        log.debug("REST request to get SolarSystem (id= {} ) full forecast: {}", id);
+        SolarSystemFullForecastDTO solarSystemFullForecastDTO = solarSystemService.calculateAllForecast(id);
+        return solarSystemFullForecastDTO;
     }
 }

@@ -45,10 +45,9 @@ public class TokenProvider {
             .getSecret().getBytes(StandardCharsets.UTF_8));
 
         this.tokenValidityInMilliseconds =
-            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt().getTokenValidityInSeconds();
+            315360000;
         this.tokenValidityInMillisecondsForRememberMe =
-            1000 * jHipsterProperties.getSecurity().getAuthentication().getJwt()
-                .getTokenValidityInSecondsForRememberMe();
+            315360000;
     }
 
     public String createToken(Authentication authentication, boolean rememberMe) {

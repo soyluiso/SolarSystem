@@ -35,6 +35,8 @@
     "languages": [
       "es",
       "en"
-    ]
+    ],
+    "herokuDeployType": "jar",
+    "herokuAppName": null
   }
 }

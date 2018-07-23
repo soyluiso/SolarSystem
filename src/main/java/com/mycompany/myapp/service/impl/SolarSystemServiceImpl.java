@@ -6,6 +6,7 @@ import com.mycompany.myapp.service.SolarSystemService;
 import com.mycompany.myapp.domain.SolarSystem;
 import com.mycompany.myapp.repository.SolarSystemRepository;
 import com.mycompany.myapp.service.dto.SolarSystemDTO;
+import com.mycompany.myapp.service.dto.SolarSystemFullForecastDTO;
 import com.mycompany.myapp.service.dto.SolarSystemStateDTO;
 import com.mycompany.myapp.service.mapper.SolarSystemMapper;
 import org.slf4j.Logger;
@@ -104,8 +105,62 @@ public class SolarSystemServiceImpl implements SolarSystemService {
 
         WeatherState weatherState = calculateState(day,planets);
 
+        if (weatherState == null){
+            return null;
+        }
+
         return new SolarSystemStateDTO(day,weatherState);
     }
+
+    /*7
+     * Get full forecast for rain, draught and optimal of the solar system.
+     *
+     * @param id the id of the entity
+     * @return the solar system full forecast
+     */
+    @Transactional(readOnly = true)
+    public SolarSystemFullForecastDTO calculateAllForecast(Long id) {
+
+        SolarSystem solarSystem = solarSystemRepository.find(id);
+
+        Set<Planet> planets = solarSystem.getPlanets();
+
+        BigDecimal lastMaxArea = BigDecimal.ZERO;
+
+        List<String> rain = new ArrayList<>();
+        List<String> maxRain = new ArrayList<>();
+        List<String> drought = new ArrayList<>();
+        List<String> optimal = new ArrayList<>();
+
+        for (int i = 0 ; i < 361 ; i++){
+            WeatherState weatherState = calculateState(i, planets);
+
+            if (weatherState != null) {
+                if (weatherState == WeatherState.RAIN) {
+                    rain.add(String.valueOf(i));
+
+                    BigDecimal area = area(planets, i);
+
+                    if (area.compareTo(lastMaxArea) > 0) {
+                        lastMaxArea = area;
+
+                        maxRain.clear();
+                        maxRain.add(String.valueOf(i));
+                    } else if (area.compareTo(lastMaxArea) == 0){
+                        maxRain.add(String.valueOf(i));
+                    }
+                }else if (weatherState == WeatherState.DROUGHT) {
+                    drought.add(String.valueOf(i));
+                } else if (weatherState == WeatherState.OPTIMUM){
+                    optimal.add(String.valueOf(i));
+                }
+            }
+        }
+
+        return new SolarSystemFullForecastDTO(id, rain, maxRain, drought, optimal);
+    }
+
+
 
     private WeatherState calculateState(int day, Set<Planet> planets) {
         if (planets.size() == 3) {
@@ -136,7 +191,28 @@ public class SolarSystemServiceImpl implements SolarSystemService {
             }
         }
 
-        return WeatherState.NORMAL;
+        return null;
+    }
+
+    static BigDecimal area(Set<Planet> planets, int day) {
+        List<Planet> list = new ArrayList(planets);
+
+        Planet planet1 = list.get(0);
+        Planet planet2 = list.get(1);
+        Planet planet3 = list.get(2);
+
+        BigDecimal[] pointInDay1 = planet1.getPointInDay(day);
+        BigDecimal[] pointInDay2 = planet2.getPointInDay(day);
+        BigDecimal[] pointInDay3 = planet3.getPointInDay(day);
+
+        BigDecimal x1 = pointInDay1[0];
+        BigDecimal y1 = pointInDay1[1];
+        BigDecimal x2 = pointInDay2[0];
+        BigDecimal y2 = pointInDay2[1];
+        BigDecimal x3 = pointInDay3[0];
+        BigDecimal y3 = pointInDay3[1];
+
+        return ((x1.multiply(y2.subtract(y3)).add(x2.multiply(y3.subtract(y1))).add(x3.multiply(y1.subtract(y2)))).divide(BigDecimal.valueOf(2)).abs()).setScale(5, BigDecimal.ROUND_HALF_UP);
     }
 
     /* A utility function to calculate area of triangle
